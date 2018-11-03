@@ -16,3 +16,4 @@
 <link href="<?= base_url('assets') ?>/masterslider/css/ms-staff-style.css" rel='stylesheet' type='text/css'>
 <link href="<?= base_url('assets') ?>/css/nouislider.min.css" rel="stylesheet">
 <script src="<?= base_url('assets') ?>/js/modernizr.js"></script>
+<link rel="stylesheet" href="<?= base_url('assets') ?>/css/slick.css">

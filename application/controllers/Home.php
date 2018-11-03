@@ -19,4 +19,16 @@ class Home extends MY_Controller
 		$this->data['location_data_key'] = json_decode(json_encode($this->data['temp']));
 		$this->load->view('home_view',$this->data);
 	}
+	public function get_city_ajax()
+	{
+		if ($this->input->server('REQUEST_METHOD') == 'POST' && $this->input->post('country_id')) {
+			$this->country_id = $this->security->xss_clean($this->input->post('country_id'));
+			$this->response = $this->website->getCitiesByCountryId($this->country_id);
+			if (count($this->response) > 0) {
+				echo json_encode(array('status' => 'success','country_data' => $this->response));
+			} else {
+				echo json_encode(array('status' => 'failure'));
+			}
+		}
+	}
 }

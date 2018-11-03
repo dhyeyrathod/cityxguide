@@ -30,13 +30,12 @@
             <div class="col-md-5 col-sm-6 col-xs-12">
                 <div class="header-top-right pull-right header-top-info">
                     <ul>
-                        <li class="country">
+                        <!-- <li class="country">
                             <div class="btn-group" role="group">
                                 <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      <i class="fa fa-globe"></i> Language
-                      <span class="caret"></span>
-                      </button>
-                      
+                                <i class="fa fa-globe"></i> Language
+                                <span class="caret"></span>
+                                </button>
                                 <ul class="dropdown-menu">
                                     <li><a href="#">English</a></li>
                                     <li><a href="#">Swedish</a></li>
@@ -45,9 +44,20 @@
                                     <li><a href="#">chinese</a></li>
                                 </ul>
                             </div>
-                        </li>
-                        <li><a href="#" data-toggle="modal" data-target=".register-model"> <i class="fa fa-user"></i> Register</a></li>
-                        <li><a href="#" data-toggle="modal" data-target=".login-model"> <i class="fa fa-sign-in"></i> log in</a></li>
+                        </li> -->
+                        <?php if ($this->session->userdata('user_id')) : ?>
+                            <li>
+                                <a href="<?= base_url('authentication/logout') ?>"> <i class="fa fa-sign-out"></i> log out</a>
+                            </li>
+                        <?php else : ?>
+                            <li>
+                                <a href="<?= base_url('authentication/registration') ?>"><i class="fa fa-user"></i> Register</a>
+                            </li>
+                            <li>
+                                <a href="<?= base_url('authentication/login') ?>"> <i class="fa fa-sign-in"></i> log in</a>
+                            </li>
+                        <?php endif ; ?>
+                        
                     </ul>
                 </div>
             </div>
@@ -55,9 +65,8 @@
     </div>
 </div>
 <header class="index4-header">
-    <a class="navbar-brand visible-xs" id="navbar-logo-mobile" href="index.html"><img src="<?= base_url('assets') ?>/images/logo.png" alt="" class="img-responsive"></a>
- <a href="post-ad.html" class="submit-btn visible-xs pull-right"><i class="fa fa-plus-square"></i> Create Ad </a>
- 
+    <a class="navbar-brand visible-xs" id="navbar-logo-mobile" href="<?= base_url() ?>"><img src="<?= base_url('assets') ?>/images/logo.png" alt="" class="img-responsive"></a>
+        <a href="post-ad.html" class="submit-btn visible-xs pull-right"><i class="fa fa-plus-square"></i> Create Ad </a>
     <nav class="navbar navbar-default hidden-xs" id="navbar">
         <div class="container">
             <div class="navbar-header">
@@ -67,11 +76,11 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" id="navbar-logo" href="index.html"><img src="<?= base_url('assets') ?>/images/logo.png" alt="" class="img-responsive"></a>
+          <a class="navbar-brand" id="navbar-logo" href="<?= base_url() ?>"><img src="<?= base_url('assets') ?>/images/logo.png" alt="" class="img-responsive"></a>
        </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" data-hover="dropdown" data-animations="fadeInDown fadeInRight fadeInUp fadeInLeft">
                 <ul class="nav navbar-nav navbar-right" id="menu-right">
-                    <li class="dropdown">
+                    <!-- <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"> Home <span class="caret"></span></a>
                 
                         <ul class="dropdown-menu" role="menu">
@@ -159,9 +168,13 @@
                         </ul>
                     </li>
                     <li>
-                <a href="contactus.html" >Contact </a>
-             </li>
-                    <li ><a href="post-ad.html" class="submit-btn"><i class="fa fa-plus-square"></i> Make New Ad </a></li>
+                        <a href="contactus.html" >Contact </a>
+                    </li> -->
+                    <?php if ($this->session->userdata('user_id')) : ?>
+                        <li>
+                            <a href="<?= base_url('accounts/add_new_post') ?>" class="submit-btn"><i class="fa fa-plus-square"></i> Make New Ad </a>
+                        </li>
+                    <?php endif ; ?>
                 </ul>
             </div>
         </div>

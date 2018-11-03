@@ -41,7 +41,7 @@ class Admin extends CI_Model
 	}
 	public function setCity($data , $city_id = 0)
 	{
-		$sql_str = "INSERT INTO city SET city_name = ".$this->db->escape($data['new_city']).", fk_country_id = ".$this->db->escape($data['country'])." , created_date = NOW() , status = true";
+		$sql_str = "INSERT INTO city SET city_name = ".$this->db->escape($data['new_city']).", fk_country_id = ".$this->db->escape($data['country'])." , created_date = NOW() , status = true , country_name = ".$this->db->escape($this->getCountryNameById($data['country']));
 		return $this->db->query($sql_str);
 	}
 	public function getAllCity()
