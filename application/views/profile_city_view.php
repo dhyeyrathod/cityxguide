@@ -38,11 +38,12 @@
                                     <?php endif ; ?>
                                     <ul class="categories-module">
                                         <?php foreach ($city_profiles_key as $city_profiles_data) : ?>
-                                            <li> <a href="<?= base_url('profile/details') ?>/<?= str_replace(' ','-', $city_profiles_data->title) ?>/<?= $this->friend->base64url_encode($city_profiles_data->id) ?>"> <?= $city_profiles_data->title ?> </a> </li>
+                                            <li> <a href="<?= base_url('profile/details') ?>/<?= str_replace(array(' ','/','|'),array('-','-','-'), $city_profiles_data->title) ?>/<?= $this->friend->base64url_encode($city_profiles_data->id) ?>"> <?= $city_profiles_data->title ?> </a> </li>
                                         <?php endforeach ; ?>
                                     </ul>
                                 </div>
                             </aside>
+                            <center><?= $this->pagination->create_links(); ?></center>
                         </div>
                     </div>
                 </div>

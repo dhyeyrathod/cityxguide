@@ -125,6 +125,7 @@
                                                 <?= form_error('description') ? form_error('description') : "" ?>
                                             </div> 
                                         </div>
+                                        <input type="hidden" name="profile_id" value="<?= $this->friend->base64url_decode($this->uri->segment(3)) ?>">
                                         <div class="col-md-12 col-sm-12">
                                             <button class="btn btn-default pull-right"><i class="fa fa-save"></i> Save Profile </button>
                                         </div>

@@ -67,11 +67,41 @@ class Accounts extends MY_Controller
 	}
 	public function editProfile()
 	{
+		if ($this->input->server('REQUEST_METHOD') && $this->form_validation->run('profile')) {
+			$this->name = $this->security->xss_clean($this->input->post('name'));		
+			$this->email = $this->security->xss_clean($this->input->post('email'));		
+			$this->title = $this->security->xss_clean($this->input->post('title'));		
+			$this->contact = $this->security->xss_clean($this->input->post('contact'));		
+			$this->website_url = $this->security->xss_clean($this->input->post('website'));		
+			$this->country_id = $this->security->xss_clean($this->input->post('country_id'));		
+			$this->city_id = $this->security->xss_clean($this->input->post('city_id'));		
+			$this->age = $this->security->xss_clean($this->input->post('age'));		
+			$this->description = $this->security->xss_clean($this->input->post('description'));
+			$this->profile_id = $this->security->xss_clean($this->input->post('profile_id'));
+			$this->respons = $this->website->setProfile($this,$this->session->userdata('user_id'),$this->profile_id);
+			if ($this->respons['status']) {
+				if (count($_FILES['profile_image']['name']) > 0) {
+					for ($i = 0 ; $i < count($_FILES['profile_image']['name']) ; $i++) {
+						$_FILES['file']['name']     	= $_FILES['profile_image']['name'][$i];
+		                $_FILES['file']['type']     	= $_FILES['profile_image']['type'][$i];
+		                $_FILES['file']['tmp_name'] 	= $_FILES['profile_image']['tmp_name'][$i];
+		                $_FILES['file']['error']     	= $_FILES['profile_image']['error'][$i];
+		                $_FILES['file']['size']     	= $_FILES['profile_image']['size'][$i];
+		                $this->load->library('upload', $this->friend->profileImageUploadConfig());
+		                if ($this->upload->do_upload('file')) {
+		                	$this->website->setProfileImages($this->upload->data('file_name'),$this->respons['last_inserted_id']);
+		                }
+					}
+				}
+				$this->session->set_flashdata('success','Profile Updated successfully..!!!!');
+				redirect('accounts/user_profiles');
+			} 
+		} 
+
+
+		
 		$profile_id = $this->friend->base64url_decode($this->uri->segment(3));
 		$this->data['profile_info'] = $this->website->getProfileInfoById($profile_id);
-		// echo "<pre>";
-		// print_r($this->data['profile_info']);
-		// exit();	
 		$this->data['profile_image'] = $this->website->getProfileImagesById($profile_id);
 		$this->data['all_country_key'] = $this->website->getAllCountryData();
 		$this->data['user_add_posted'] = $this->website->getAllAddPostByUser($this->session->userdata('user_id'));

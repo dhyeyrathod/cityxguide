@@ -47,13 +47,22 @@ class Website extends CI_Model
 		$sql_str = "SELECT * FROM city WHERE fk_country_id = ".$this->db->escape($country_id);
 		return $this->db->query($sql_str)->result();
 	}
-	public function setProfile($data , $user_id)
+	public function setProfile($data,$user_id,$profile_id = 0)
 	{
-		$sql_str = "INSERT INTO profile SET title = ".$this->db->escape($data->title).",name = ".$this->db->escape($data->name).",contact = ".$this->db->escape($data->contact).",email = ".$this->db->escape($data->email).",city_id = ".$this->db->escape($data->city_id).",city_name = ".$this->db->escape($this->getCityInfoById($data->city_id)->city_name).",country_id = ".$this->db->escape($data->country_id).",country_name = ".$this->db->escape($this->getCountryInfobyCountrId($data->country_id)->country_name).",website = ".$this->db->escape($data->website_url).",age = ".$this->db->escape($data->age).",status = TRUE , created_date = NOW() , created_by = ".$this->db->escape($user_id).",descriptions = ".$this->db->escape($data->description).",fk_user_id = ".$this->db->escape($user_id);
-		if ($this->db->query($sql_str)) {
-			return array('status' =>true , 'last_inserted_id'=>$this->db->insert_id());
+		if ($profile_id == 0) {
+			$sql_str = "INSERT INTO profile SET title = ".$this->db->escape($data->title).",name = ".$this->db->escape($data->name).",contact = ".$this->db->escape($data->contact).",email = ".$this->db->escape($data->email).",city_id = ".$this->db->escape($data->city_id).",city_name = ".$this->db->escape($this->getCityInfoById($data->city_id)->city_name).",country_id = ".$this->db->escape($data->country_id).",country_name = ".$this->db->escape($this->getCountryInfobyCountrId($data->country_id)->country_name).",website = ".$this->db->escape($data->website_url).",age = ".$this->db->escape($data->age).",status = TRUE , created_date = NOW() , created_by = ".$this->db->escape($user_id).",descriptions = ".$this->db->escape($data->description).",fk_user_id = ".$this->db->escape($user_id);
+			if ($this->db->query($sql_str)) {
+				return array('status' =>true , 'last_inserted_id'=>$this->db->insert_id());
+			} else {
+				return array('status' =>'failure');
+			}
 		} else {
-			return array('status' =>'failure');
+			$sql_str = "UPDATE profile SET title = ".$this->db->escape($data->title).",name = ".$this->db->escape($data->name).",contact = ".$this->db->escape($data->contact).",email = ".$this->db->escape($data->email).",city_id = ".$this->db->escape($data->city_id).",city_name = ".$this->db->escape($this->getCityInfoById($data->city_id)->city_name).",country_id = ".$this->db->escape($data->country_id).",country_name = ".$this->db->escape($this->getCountryInfobyCountrId($data->country_id)->country_name).",website = ".$this->db->escape($data->website_url).",age = ".$this->db->escape($data->age).",status = TRUE , created_date = NOW() , created_by = ".$this->db->escape($user_id).",descriptions = ".$this->db->escape($data->description).",fk_user_id = ".$this->db->escape($user_id)." WHERE id = ".$this->db->escape($profile_id);
+			if ($this->db->query($sql_str)) {
+				return array('status' =>true,'last_inserted_id'=>$profile_id);
+			} else {
+				return array('status' =>'failure');
+			}
 		}
 	}
 	public function getCityInfoById($city_id)
@@ -85,10 +94,18 @@ class Website extends CI_Model
 		$sql_str = "SELECT profile.id as id , title , country_name , city_name , (SELECT image_name FROM profile_images WHERE fk_profile_id = profile.id LIMIT 1) AS image_name , created_date FROM profile WHERE fk_user_id = ".$this->db->escape($user_id);
 		return $this->db->query($sql_str)->result();
 	}
-	public function getAllProfileByCityId($city_id)
+	public function getAllProfileByCityId($city_id , $limit , $offset = 0)
 	{
-		$sql_str = "SELECT * FROM profile WHERE city_id = ".$this->db->escape($city_id)." AND status = true";
+		$sql_str = "SELECT * FROM profile WHERE city_id = ".$this->db->escape($city_id)." AND status = true LIMIT $limit";
+		if ($offset != 0) {
+			$sql_str .= " OFFSET $offset";
+		}	
 		return $this->db->query($sql_str)->result();
+	}
+	public function getCountprofileByCity($city_id)
+	{
+		$sql_str = "SELECT COUNT(*) AS total_profile FROM profile WHERE city_id = ".$this->db->escape($city_id)." AND status = true";
+		return $this->db->query($sql_str)->row();
 	}
 	public function getProfileInfoById($profile_id)
 	{
