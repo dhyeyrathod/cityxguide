@@ -10,6 +10,35 @@
     </head>
     <body>
         <?php $this->load->view('common/header') ?>
+        <section class="flate-search">
+         <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <form class="form-inline">
+                        <div class="col-md-6 col-sm-4 col-xs-12">
+                        
+                        </div>
+                        <div class="col-md-3 col-sm-3 col-xs-12">
+                            <div class="form-group">
+                                <select class="select-category form-control select2-hidden-accessible">
+                                    <option label="Select Option">---Select Country---</option>
+                              
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-3 col-xs-12">
+                            <div class="form-group">
+                                <select class="select-category form-control select2-hidden-accessible">
+                                    <option label="Select Option">---Select City---</option>
+                              
+                                </select>
+                            </div>
+                        </div>  
+                    </form>
+                </div>
+            </div>
+         </div>
+      </section>
         <section class="pricing-section-1 pricing-white light-blue">
             <div class="container">
                 <div class="row">

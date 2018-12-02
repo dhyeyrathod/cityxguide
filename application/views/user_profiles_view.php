@@ -31,7 +31,7 @@
                                             <li>
                                                 <div class="col-md-10 col-lg-10">
                                                     <img src="<?= base_url('profile_image') ?>/<?= $user_profiles_data->image_name ? $user_profiles_data->image_name : "default.jpg" ?>" alt="post image" class="img-responsive">
-                                                    <a href="#"><?= $user_profiles_data->title ?></a>
+                                                    <a href="<?= base_url('profile/details') ?>/<?= str_replace(array(' ','/','|'),array('-','-','-'), $user_profiles_data->title) ?>/<?= $this->friend->base64url_encode($user_profiles_data->id) ?>"><?= $user_profiles_data->title ?></a>
                                                     <span><i class="fa fa-calendar"></i> <?= $user_profiles_data->created_date ?> </span>
                                                 </div>
                                                 <a href="<?= base_url('accounts/delete_profile') ?>/<?= $this->friend->base64url_encode($user_profiles_data->id) ?>"><button class="btn btn-danger pull-right"><i class="fa fa-close"></i> Delete </button></a>

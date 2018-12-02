@@ -172,7 +172,7 @@
                     </li> -->
                     <?php if ($this->session->userdata('user_id')) : ?>
                         <li>
-                            <a href="<?= base_url('accounts/add_new_post') ?>" class="submit-btn"><i class="fa fa-plus-square"></i> Make New Ad </a>
+                            <a href="<?= base_url('accounts/add_new_post') ?>" class="submit-btn"><i class="fa fa-plus-square"></i> Dashboard </a>
                         </li>
                     <?php endif ; ?>
                 </ul>
