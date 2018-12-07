@@ -10,8 +10,13 @@ class Website extends CI_Model
 	}
 	public function getAllCountry()
 	{
-		$sql_str = "SELECT * FROM country";
+		$sql_str = "SELECT * FROM country ORDER BY country_name ASC";
 		return $this->db->query($sql_str)->result_array();
+	}
+	public function getAllCountryObj()
+	{
+		$sql_str = "SELECT * FROM country";
+		return $this->db->query($sql_str)->result();
 	}
 	public function getCityByCountryId($country_id)
 	{
@@ -70,6 +75,11 @@ class Website extends CI_Model
 		$sql_str = "SELECT city_name , fk_country_id , created_date , updated_date , status , (SELECT country_name FROM country WHERE id = city.fk_country_id) AS country_name FROM city WHERE id = ".$this->db->escape($city_id);
 		return $this->db->query($sql_str)->row();
 	}
+	public function getCountryInfoById($country_id)
+	{
+		$sql_str = "SELECT * FROM country WHERE id = ".$this->db->escape($country_id);
+		return $this->db->query($sql_str)->row();
+	}
 	public function getCountryInfobyCountrId($country_id)
 	{
 		return $this->db->get_where('country', array('id' => $country_id))->row();
@@ -121,5 +131,18 @@ class Website extends CI_Model
 	{
 		$sql_str = "DELETE FROM profile WHERE id = ".$this->db->escape($profile_id);
 		return $this->db->query($sql_str);
+	}
+	public function getProfileByCountryId($country_id ,$limit , $offset = 0)
+	{
+		$sql_str = "SELECT * FROM profile WHERE country_id = ".$this->db->escape($country_id)." AND status = true LIMIT $limit";
+		if ($offset != 0) {
+			$sql_str .= " OFFSET $offset";
+		}
+		return $this->db->query($sql_str)->result();
+	}
+	public function getCountProfileByCounry($country_id)
+	{
+		$sql_str = "SELECT * FROM profile WHERE country_id = ".$this->db->escape($country_id);
+		return $this->db->query($sql_str)->num_rows();
 	}
 }

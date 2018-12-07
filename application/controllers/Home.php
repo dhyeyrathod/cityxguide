@@ -16,6 +16,7 @@ class Home extends MY_Controller
 			$country_data['cities'] = $this->website->getCityByCountryId($country_data['id']);
 			array_push($this->data['temp'],$country_data);
 		}
+		$this->data['country_key'] = $this->website->getAllCountryObj();
 		$this->data['location_data_key'] = json_decode(json_encode($this->data['temp']));
 		$this->load->view('home_view',$this->data);
 	}

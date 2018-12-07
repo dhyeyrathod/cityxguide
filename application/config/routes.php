@@ -57,6 +57,7 @@ $route['translate_uri_dashes'] = FALSE;
 $route['(:any)-escorts/(:any)'] = 'profile/cities';
 $route['(:any)-escorts/(:any)/(:num)'] = 'profile/cities';
 
-
+$route['Escorts-(:any)/(:any)'] = 'profile/country';
+$route['Escorts-(:any)/(:any)/(:num)'] = 'profile/country';
 
 $route['escorts/(:any)/(:any)'] = 'profile/details';
