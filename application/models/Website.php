@@ -72,7 +72,7 @@ class Website extends CI_Model
 	}
 	public function getCityInfoById($city_id)
 	{
-		$sql_str = "SELECT city_name , fk_country_id , created_date , updated_date , status , (SELECT country_name FROM country WHERE id = city.fk_country_id) AS country_name FROM city WHERE id = ".$this->db->escape($city_id);
+		$sql_str = "SELECT id , city_name , fk_country_id , created_date , updated_date , status , (SELECT country_name FROM country WHERE id = city.fk_country_id) AS country_name FROM city WHERE id = ".$this->db->escape($city_id);
 		return $this->db->query($sql_str)->row();
 	}
 	public function getCountryInfoById($country_id)
@@ -144,5 +144,14 @@ class Website extends CI_Model
 	{
 		$sql_str = "SELECT * FROM profile WHERE country_id = ".$this->db->escape($country_id);
 		return $this->db->query($sql_str)->num_rows();
+	}
+	public function getUserInfoByEmail($email)
+	{
+		return $this->db->get_where('members', array('email_id' => $email))->row();
+	}
+	public function getCountryInfoByCityId($city_id)
+	{
+		$sql_str = "SELECT fk_country_id as id , country.country_name as country_name FROM city INNER JOIN country ON country.id = city.fk_country_id WHERE city.id = ".$this->db->escape($city_id);
+		return $this->db->query($sql_str)->row();
 	}
 }

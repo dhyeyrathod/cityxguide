@@ -89,4 +89,4 @@ defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest auto
 | Base Url
 |--------------------------------------------------------------------------
 */
-define('BASE_URL','http://localhost/jayrathod/cityxguid/admin/');
+define('BASE_URL','http://adsstone.com/admin/');

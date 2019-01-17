@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="">
         <meta name="author" content="ScriptsBundle">
-        <title>AdZone A Complete Classified Solution Template</title>
+        <title>Escorts Classified Ads India | Adult Ads Posting Classifieds India | Submit Ads in India</title>
         <?php $this->load->view('common/css') ?>
     </head>
     <body>

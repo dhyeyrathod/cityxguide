@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="">
         <meta name="author" content="ScriptsBundle">
-        <title>AdZone A Complete Classified Solution Template</title>
+        <title>Escorts Classified Ads India | Adult Ads Posting Classifieds India | Submit Ads in India</title>
         <?php $this->load->view('common/css') ?>
     </head>
     <body>
@@ -27,7 +27,7 @@
                                     <div class="col-md-12 col-sm-12">
                                         <div class="form-group">
                                             <label>Email <span class="required">*</span></label>
-                                            <input class="form-control" value="<?= set_value('email') ?>" name="email" type="text">
+                                            <input class="form-control" value="<?= set_value('email') ?>" name="email" type="email">
                                             <?= form_error('email') ? form_error('email','<div class="text-danger">','</div>') : " " ?>
                                         </div>
                                     </div>

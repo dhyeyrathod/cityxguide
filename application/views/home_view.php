@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="author" content="ScriptsBundle">
-        <title>AdZone A Complete Classified Solution Template</title>
+        <title>Worldwide Escorts Classifieds|High Profile Call Girls Directory</title>
         <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
         <?php $this->load->view('common/css') ?>
     </head>

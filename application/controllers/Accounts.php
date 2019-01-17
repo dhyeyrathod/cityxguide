@@ -55,7 +55,7 @@ class Accounts extends MY_Controller
 		$this->data['user_add_posted'] = $this->website->getAllAddPostByUser($this->session->userdata('user_id'));
 		$this->data['user_profiles_key'] = $this->website->getAllUserProfileByUserId($this->user_data['user_info']->id);
 		if ($this->data['user_add_posted']->total_post == 0) :
-			$this->session->set_flashdata('success','Profile is not present in your account..!!! please Create new Profile');redirect('accounts/user_profiles');endif ;
+			$this->session->set_flashdata('success','Profile is not present in your account..!!! please Create new Profile');redirect('accounts/add_new_post');endif ;
 		$this->load->view('user_profiles_view',$this->data);
 	}
 	public function delete_profile()

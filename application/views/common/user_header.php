@@ -11,12 +11,12 @@
                         </li>
                         <li class="<?php if($this->uri->segment(2) == "add_new_post") : echo "active" ; endif ; ?>">
                             <a href="<?= base_url('accounts/add_new_post') ?>">
-                                <div class="menue-name">Add New Profile</div>
+                                <div class="menue-name">Add New Add</div>
                             </a>
                         </li>
                         <li class="<?php if($this->uri->segment(2) == "user_profiles") : echo "active" ; endif ; ?>">
                             <a href="<?= base_url('accounts/user_profiles') ?>">
-                                <div class="menue-name">Your Profiles</div>
+                                <div class="menue-name">Adds Details</div>
                             </a>
                         </li>
 

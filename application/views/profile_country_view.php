@@ -5,7 +5,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="">
         <meta name="author" content="ScriptsBundle">
-        <title>AdZone A Complete Classified Solution Template</title>
+        <title><?= $country_info->country_name ?> Escorts Classifieds|Call Girls Directory <?= $country_info->country_name ?></title>
+        <meta name="description" content="Available now hot & sexy <?= $country_info->country_name ?> escorts classifieds , post more details about sizzling and sensual call girls service in <?= $country_info->country_name ?> on demand VIP escorts services available 24/7.">
+            <meta name="keywords" content="<?= $country_info->country_name ?> escorts directory,<?= $country_info->country_name ?> call girls service,<?= $country_info->country_name ?> escorts ageny ads, <?= $country_info->country_name ?> femal massage classifieds ,<?= $country_info->country_name ?> male escorts classifieds,<?= $country_info->country_name ?> vip call girls">
         <?php $this->load->view('common/css') ?>
     </head>
     <body>
