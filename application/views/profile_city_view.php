@@ -62,6 +62,11 @@
                     </div>
                 </div>
             </section>
+            <div class="load-more-btn">            
+                <?php foreach ($cities_info_key as $key => $city_data) :  ?>
+                   <a href="<?= base_url() ?><?= $city_data->city_name ?>-escorts/<?= $this->friend->base64url_encode($city_data->id) ?>" class="btn btn-link"><?= $city_data->city_name ?></a>
+                <?php endforeach ; ?>
+            </div>
             <section class="pricing-section-1 pricing-white light-blue">
                 <div class="container">
                     <div class="row">

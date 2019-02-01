@@ -35,4 +35,12 @@ class Friend
 	 	$config['last_link'] = FALSE;
 	    return $config ;
 	}
+	public function VideoUploadConfig()
+	{
+		$config['upload_path'] = './profile_video/';
+		$config['allowed_types'] = 'avi|mp4|3gp|mpeg|mpg|mov|mp3|flv|wmv';
+		$config['encrypt_name'] = TRUE ;
+		$config['max_size'] = 10000 ;
+		return $config ;
+	}
 }

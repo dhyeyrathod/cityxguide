@@ -44,6 +44,9 @@
                                 <a href="<?= base_url('authentication/login') ?>"> <i class="fa fa-sign-in"></i> log in</a>
                             </li>
                         <?php endif ; ?>
+                          <li>
+                              <a href="<?= base_url('video/index') ?>"> <i class="fa fa-video"></i> Videos </a>
+                          </li>
                     </ul>
                 </div>
             </div>

@@ -15,7 +15,7 @@ class Website extends CI_Model
 	}
 	public function getAllCountryObj()
 	{
-		$sql_str = "SELECT * FROM country";
+		$sql_str = "SELECT * FROM country ORDER BY country_name ASC";
 		return $this->db->query($sql_str)->result();
 	}
 	public function getCityByCountryId($country_id)
@@ -44,12 +44,12 @@ class Website extends CI_Model
 	}
 	public function getAllCountryData()
 	{
-		$sql_str = "SELECT * FROM country";
+		$sql_str = "SELECT * FROM country ORDER BY country_name ASC";
 		return $this->db->query($sql_str)->result();
 	}
 	public function getCitiesByCountryId($country_id)
 	{
-		$sql_str = "SELECT * FROM city WHERE fk_country_id = ".$this->db->escape($country_id);
+		$sql_str = "SELECT * FROM city WHERE fk_country_id = ".$this->db->escape($country_id)." ORDER BY city_name ASC";
 		return $this->db->query($sql_str)->result();
 	}
 	public function setProfile($data,$user_id,$profile_id = 0)
@@ -152,6 +152,26 @@ class Website extends CI_Model
 	public function getCountryInfoByCityId($city_id)
 	{
 		$sql_str = "SELECT fk_country_id as id , country.country_name as country_name FROM city INNER JOIN country ON country.id = city.fk_country_id WHERE city.id = ".$this->db->escape($city_id);
+		return $this->db->query($sql_str)->row();
+	}
+	public function getAllTags()
+	{
+		$sql_str = "SELECT * FROM tag_master";
+		return $this->db->query($sql_str)->result();	
+	}
+	public function setVideo($data , $user_id)
+	{
+		$sql_str = "INSERT INTO videos SET fk_user_id = ".$this->db->escape($user_id).",title = ".$this->db->escape($data->post_data->video_title).",description = ".$this->db->escape($data->post_data->video_description).",video = ".$this->db->escape($data->post_data->video_name).",tags = ".$this->db->escape($data->post_data->video_tags).",url = ".$this->db->escape($data->post_data->video_website).",status = TRUE , created_date = NOW() , created_by = ".$this->db->escape($user_id).",is_admin = FALSE";
+		return $this->db->query($sql_str);
+	}
+	public function getAllVideo()
+	{
+		$sql_str = "SELECT * FROM videos";
+		return $this->db->query($sql_str)->result();
+	}
+	public function getSingleVideos($video_id)
+	{
+		$sql_str = "SELECT * FROM videos WHERE id = ".$this->db->escape($video_id);
 		return $this->db->query($sql_str)->row();
 	}
 }

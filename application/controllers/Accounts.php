@@ -40,6 +40,7 @@ class Accounts extends MY_Controller
 	                	$this->website->setProfileImages($this->upload->data('file_name'),$this->respons['last_inserted_id']);
 	                }
 				}
+				ob_end_flush();
 				$this->session->set_flashdata('success','Profile created successfully..!!!!');
 				redirect('accounts/add_new_post');
 			} 
@@ -97,14 +98,37 @@ class Accounts extends MY_Controller
 				redirect('accounts/user_profiles');
 			} 
 		} 
-
-
-		
 		$profile_id = $this->friend->base64url_decode($this->uri->segment(3));
 		$this->data['profile_info'] = $this->website->getProfileInfoById($profile_id);
 		$this->data['profile_image'] = $this->website->getProfileImagesById($profile_id);
 		$this->data['all_country_key'] = $this->website->getAllCountryData();
 		$this->data['user_add_posted'] = $this->website->getAllAddPostByUser($this->session->userdata('user_id'));
 		$this->load->view('edit_profile_view',$this->data);
+	}
+	public function video_section()
+	{
+		$this->form_validation->set_rules('title', 'Video Title', 'required');
+		$this->form_validation->set_rules('website_url', 'Website URL', 'required|valid_url');
+		$this->form_validation->set_rules('description', 'Description', 'required');
+		$this->form_validation->set_rules('tags', 'Tags', 'required');
+		$this->form_validation->set_error_delimiters('<div class="text-danger">','</div>');
+		if ($this->input->server('REQUEST_METHOD') == 'POST' && $this->form_validation->run()) {
+			$this->load->library('upload',$this->friend->VideoUploadConfig());
+			if ($this->upload->do_upload('profile_video')) {
+				$this->post_data->video_name = $this->upload->data('file_name');
+				$this->post_data->video_title = $this->security->xss_clean($this->input->post('title'));
+				$this->post_data->video_website = $this->security->xss_clean($this->input->post('website_url'));
+				$this->post_data->video_description = $this->security->xss_clean($this->input->post('description'));
+				$this->post_data->video_tags = $this->security->xss_clean($this->input->post('tags'));
+				if ($this->website->setVideo($this,$this->session->userdata('user_id'))) {
+					$this->session->set_flashdata('success','video Upload successfully ...!!!');redirect('accounts/video_section');
+				} 
+			} else {
+				$this->session->set_flashdata('error',$this->upload->display_errors());redirect('accounts/video_section');
+			}
+		}	
+		$this->data['user_add_posted'] = $this->website->getAllAddPostByUser($this->session->userdata('user_id'));
+		$this->data['all_country_key'] = $this->website->getAllCountryData();
+		$this->load->view('video_section',$this->data);
 	}
 }

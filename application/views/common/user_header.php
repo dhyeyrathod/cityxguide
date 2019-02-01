@@ -19,6 +19,11 @@
                                 <div class="menue-name">Adds Details</div>
                             </a>
                         </li>
+                        <li class="<?php if($this->uri->segment(2) == "video_section") : echo "active" ; endif ; ?>">
+                            <a href="<?= base_url('accounts/video_section') ?>">
+                                <div class="menue-name">Video Section</div>
+                            </a>
+                        </li>
 
                     </ul>
                 </div>
